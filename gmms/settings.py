@@ -133,6 +133,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',  # Enable JWT
@@ -147,4 +148,17 @@ from datetime import timedelta
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Access token expires in 60 minutes
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),  # Refresh token expires in 1 day
+    'ROTATE_REFRESH_TOKENS': True,  # Issue a new refresh token on each refresh
+    'BLACKLIST_AFTER_ROTATION': True,  # Blacklist old refresh tokens
+    'UPDATE_LAST_LOGIN': True,  # Update the user's last login time on token refresh
+
+    'ALGORITHM': 'HS256',  # Use HMAC-SHA256 for token signing
+    'SIGNING_KEY': '8c5a7a12f84ca1ecc4b699a3',  # Replace with a strong secret key
+    'VERIFYING_KEY': None,  # No public key for HMAC
+    'AUDIENCE': None,
+    'ISSUER': None,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),  # Authorization header type
+    'USER_ID_FIELD': 'id',  # Use the user's ID field for token claims
+    'USER_ID_CLAIM': 'user_id',  # Claim name for the user ID
 }
