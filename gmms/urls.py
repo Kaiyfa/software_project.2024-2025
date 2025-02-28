@@ -16,10 +16,16 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from mining.views import homepage  # Import homepage view
+
 from django.urls import path, include
+from django.http import HttpResponse
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('api/', include('mining.urls')), 
+    path('', include('mining.urls')), 
+    path('', homepage, name='homepage'),  # Add homepage route
+
+
 ]
